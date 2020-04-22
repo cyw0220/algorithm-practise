@@ -8,6 +8,7 @@ const boolTag = '[object Boolean]'
 const dateTag = '[object Date]'
 const numberTag = '[object Number]'
 const stringTag = '[object String]'
+const symbolTag = '[object Symbol]'
 const errorTag = '[object Error]'
 const regexpTag = '[object RegExp]'
 const functionTag = '[object Function]'
@@ -111,7 +112,7 @@ function deepClone(target, map=new WeakMap()) {
 
     if(type === mapTag) {
         target.forEach((value,key) => {
-            cloneTarget.set(key, clone(value))
+            cloneTarget.set(key, deepClone(value))
         })
         return cloneTarget
     }

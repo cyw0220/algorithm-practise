@@ -40,11 +40,11 @@ class PromiseCyw {
     }
 
     then(onFulfilled, onRejected) {
-        let newPromise;
+        let newPromise
         onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
         onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason }
 
-        if(this.state = FULFILLED) {
+        if(this.state === FULFILLED) {
             return newPromise = new PromiseCyw((resolve, reject) => {
                 try {
                     let x = onFulfilled(this.value)
@@ -55,7 +55,7 @@ class PromiseCyw {
             })
         }
 
-        if(this.state = REJECTED) {
+        if(this.state === REJECTED) {
             return newPromise = new PromiseCyw((resolve, reject) => {
                 try {
                     let x = onRejected(this.reason)
@@ -68,7 +68,7 @@ class PromiseCyw {
 
         if (this.status === PENDING) { // 等待态
             // 当异步调用resolve/rejected时 将onFulfilled/onRejected收集暂存到集合中
-            return newPromise = new Promise((resolve, reject) => {
+            return newPromise = new PromiseCyw((resolve, reject) => {
                 this.onFulfilledCallbacks.push((value) => {
                     try {
                         let x = onFulfilled(value)
@@ -84,8 +84,8 @@ class PromiseCyw {
                     } catch(e) {
                         reject(e)
                     }
-                });
-            });
+                })
+            })
         }
     }
     
